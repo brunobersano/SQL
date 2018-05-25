@@ -1,0 +1,14 @@
+--Report containing all contracts crated on a certain date, joining with the salesperson roster table
+
+select c.kore_name as 'Deal Sheet',
+c.sf_accountidname as 'Account',
+rr.sf_useridname as 'Sales Person',
+c.kore_startseasonidname,
+c.kore_endseasonidname
+from kore_contract c 
+inner join (select distinct kore_contractid, sf_useridname   from KORE_rosterrelationship where kore_typename = 'Salesperson' and statecode = 0) rr on c.kore_contractid = rr.kore_contractid
+where c.createdon between '2018-05-21 00:00:00.000' and '2018-05-21 23:59:00.000' 
+and c.createdby = '005i0000006qZf8AAE'
+order by c.createdon
+
+
