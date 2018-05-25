@@ -1,0 +1,30 @@
+--Update part of the string name in both section and seat
+-- The section name says CLUBC250 and it should be CLUB250. Can we please update that as well.
+select 
+kore_sectionholdid,
+kore_seatid,
+kore_seatidname,
+h.kore_sectionid,
+h.kore_sectionidname
+from kore_sectionhold h
+where h.kore_sectionholdid in
+(
+--inser ids here
+)
+
+-- No section with the name CLUBC250. Seat name in kore_sectionhold should not affected this table
+select * from kore_section s where s.kore_name like 'CLUB%' order by  kore_name
+
+-- Seat name in kore_seat all begin with  CLUB250. 
+Select  * from kore_seat s where s.kore_name like'CLUBC250%' or s.kore_name like  'CLUB250'
+
+--We should update kore_seat.kore_name and  kore_sectionhold.kore_seatidname will automatically update since it's a field in the view only
+update kore_seatbase
+set kore_name = REPLACE(kore_name, 'CLUBC250', 'CLUB250')
+where kore_seatid in
+(
+insert ids here
+)
+
+
+ 
